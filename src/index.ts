@@ -4,7 +4,7 @@ import { commands } from "./commands";
 import { deployCommands } from "./deployCommands";
 
 export const client = new Client({
-    intents: ["Guilds", "GuildMessages", "DirectMessages", "MessageContent", "GuildBans"],
+    intents: ["Guilds", "GuildMessages", "DirectMessages", "MessageContent", "GuildBans" ],
 });
 
 client.once("ready", async () => {
