@@ -30,10 +30,12 @@ jobs:
     - name: Commit built files
       if: success()
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git diff
         git add .
-        git commit -m 'Build project'
+        git config --global user.email "github-action-bot@example.com"
+        git config --global user.name "GitHub Action Bot"
+        git commit -m "Updated game" -a
         git push
+        
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
