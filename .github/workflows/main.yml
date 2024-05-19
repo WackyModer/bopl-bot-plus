@@ -34,7 +34,7 @@ jobs:
         git add .
         git config --global user.email "github-action-bot@example.com"
         git config --global user.name "GitHub Action Bot"
-        git commit -m "Updated game" -a
+        git commit -m "Built project for server" -a
         git push
         
       env:
