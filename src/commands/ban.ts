@@ -23,7 +23,7 @@ export async function execute(interaction: CommandInteraction) {
         .setTitle("Failure with command!")
         .setDescription(`<@${interaction.member?.user.id}>. You cannot ban <@!${interaction.options.get("userid")?.user?.id}>.\nNice try.`)
         .setTimestamp()
-        interaction.reply({ embeds: [failedEmbed] });
+        interaction.reply({ embeds: [failedEmbed], ephemeral: true });
 
         logMessage("Someone tried to unban someone without perms...", [failedEmbed]);
         return;
@@ -32,13 +32,14 @@ export async function execute(interaction: CommandInteraction) {
         interaction.guild?.members.ban(`${interaction.options.get("userid")?.user?.id}`, { "reason":  interaction.options.get("reason")?.value?.toString(), "deleteMessageSeconds": 0 });
         } catch {
             interaction.reply({ content:"Uh oh! The user id may not exist or they may be already banned!", ephemeral: true});
+            logMessage(`Failed ban by <@!${interaction.user.id}>`);
             return;
         }
 
         var unbanEmbed = new EmbedBuilder()
         .setColor(0x26da15)
         .setTitle("Success!")
-        .setDescription(`<@${interaction.member?.user.id}> banned <@!${interaction.options.get("userid")?.user?.id}>.\n\nReason: ${interaction.options.get("reason")?.value?.toString()}`)
+        .setDescription(`<@${interaction.member?.user.id}> banned <@!${interaction.options.get("userid")?.user?.id}>.\nReason: ${interaction.options.get("reason")?.value?.toString()}`)
         .setTimestamp();
         interaction.reply({ embeds: [unbanEmbed] }).then(() => 
         setTimeout(() => {
