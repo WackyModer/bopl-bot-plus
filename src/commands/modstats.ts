@@ -73,11 +73,15 @@ export async function execute(interaction: CommandInteraction) {
         console.log(theMod.versions);
 
         var totalModDownloads = 0 
-        
+        var versionList = ""
+
         theMod.versions.forEach((ver: versionOBJ) => {
             totalModDownloads += ver.downloads;
+            versionList = ver.version_number + ", " + versionList;
+            console.log(versionList);
         })
-
+        versionList = versionList.substring(0, versionList.length - 2);
+        
         var modEmbed = new EmbedBuilder()
         .setColor(0x32dbe2)
         .setDescription(`
@@ -91,7 +95,8 @@ export async function execute(interaction: CommandInteraction) {
             { name: 'Description', value: theMod.versions[0].description },
             //{ name: '\u200B', value: '\u200B' },
             { name: 'Downloads', value: totalModDownloads.toString(), inline: true },
-            { name: 'Author', value: theMod.owner , inline: true },
+            { name: 'Author', value: theMod.owner, inline: true },
+            { name: 'Versions', value: versionList },
         )
         .setThumbnail(theMod.versions[0].icon)
         .setTimestamp()
