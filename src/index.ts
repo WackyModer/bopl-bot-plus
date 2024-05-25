@@ -2,6 +2,9 @@ import { Client } from "discord.js";
 import { config } from "./config";
 import { commands } from "./commands";
 import { deployCommands } from "./deployCommands";
+import { clearCommands } from "./deployCommands";
+
+const guildId = "1241406342472667136";
 
 export const client = new Client({
     intents: ["Guilds", "GuildMessages", "DirectMessages", "MessageContent", "GuildBans" ],
@@ -9,8 +12,10 @@ export const client = new Client({
 
 client.once("ready", async () => {
     console.log(`Logged in as ${client.user?.username}`);
+
+    await clearCommands();
     
-    await deployCommands();
+    await deployCommands( {guildId} );
 });
 
 /*
